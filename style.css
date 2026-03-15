@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 720px;
+    padding: 20px;
+}
+
+.author {
+    position: fixed;   
+    bottom: 20px;
+    left: 40px;
+    text-align: left; 
+    z-index: 10;
+    font-size: x-small;
+    color: #111;
+}
+
+#promptInput {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    /* border: 1px dashed #919191; */
+    border-radius: 2px;
+    font-size: small;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    color: #111;
+    background-color: #111;
+    caret-color: white;
+    overflow-y: auto;
+    line-height: 1.2;
+    position: relative;
+}
+
+[contenteditable]:empty:before {
+    color: #919191;
+    cursor: text;
+    display: inline-block;
+    position: absolute;
+}
+
+.chip {
+    display: inline-block;
+    background-color: #F5F5F5;
+    border: 0.5px solid #111;
+    color: #333;
+    padding: 4px 8px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 2px;
+    font-size: small;
+    vertical-align: middle;
+}
+
+.controls {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    padding: 8px 8px;
+    background-color: white;
+    color: #111;
+    border: 0.5px solid #111;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 200;
+    font-size: small;
+}
+
+button:hover {
+    background-color: #f9f9f9;
+}
+
+#clearBtn {
+    display: none;
+    margin-right: auto;
+}
+
+#bgVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    width: 100vw;
+    height: 100vh;
+    
+    object-fit: cover;
+    
+    filter:contrast(110%);
+    z-index: -1;
+}
+
+::selection {
+    color: #111;
+    background: #222;
+  }
+
+  /* unvisited link */
+a:link {
+    color: #111;
+    text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #111;
+    text-decoration: none;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+    text-decoration: underline;
+  }

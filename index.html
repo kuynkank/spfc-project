@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futile Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <video autoplay muted loop id="bgVideo">
+        <source src="video_draft_2.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <div class="chat-container">
+        <div id="promptInput" role="textbox" aria-label="Write your entry here" contenteditable="true" spellcheck="false"
+            tabindex="1"></div>
+
+        <div class="controls">
+            <button id="clearBtn" aria-label="Clear all entries" tabindex="3">FORGET</button>
+            <button id="askBtn" aria-label="Create a new entry" tabindex="2">ASK</button>
+        </div>
+    </div>
+
+    <div class="author">
+        <p>by <a href="https://www.angiepham.space/" target="_blank">angie-pham</a></p>
+    </div>
+
+    <script>
+        const input = document.getElementById('promptInput');
+        const askBtn = document.getElementById('askBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const video = document.getElementById('bgVideo');
+
+        const updateButtonVisibility = () => {
+            const chips = input.querySelectorAll('.chip');
+            clearBtn.style.display = chips.length > 0 ? 'inline-block' : 'none';
+        };
+
+        window.onload = () => {
+            const savedContent = localStorage.getItem('userPrompt');
+            if (savedContent) {
+                input.innerHTML = savedContent;
+            }
+            updateButtonVisibility();
+
+            if (input.innerHTML.trim() === "") {
+                input.focus();
+            } else {
+                placeCaretAtEnd(input);
+            }
+        };
+
+        input.addEventListener('input', () => {
+            if (text.length > 0) {
+                video.pause();
+            } else {
+                if (text === "") {
+                    input.innerHTML = ""; 
+                }
+                video.play();
+                }
+            localStorage.setItem('userPrompt', input.innerHTML);
+            updateButtonVisibility();
+        });
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                askBtn.click();
+            }
+        });
+
+        input.addEventListener('keyup', (e) => {
+            if (e.key === 'Backspace' || e.key === 'Delete') {
+                updateButtonVisibility();
+            }
+        });
+
+        askBtn.addEventListener('click', () => {
+            let newText = "";
+            const nodesToRemove = [];
+
+            input.childNodes.forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    newText += node.textContent;
+                    nodesToRemove.push(node);
+                }
+            });
+
+            const trimmedText = newText.trim();
+
+            if (trimmedText) {
+                nodesToRemove.forEach(node => node.remove());
+
+                const chip = document.createElement('span');
+                chip.className = 'chip';
+                chip.contentEditable = "false";
+                chip.innerText = trimmedText;
+
+                input.appendChild(chip);
+
+                input.appendChild(document.createElement('br'));
+                input.appendChild(document.createElement('br'));
+
+                video.play();
+
+                localStorage.setItem('userPrompt', input.innerHTML);
+                updateButtonVisibility();
+                placeCaretAtEnd(input);
+            }
+        });
+
+        clearBtn.addEventListener('click', () => {
+            localStorage.removeItem('userPrompt');
+            input.innerHTML = '';
+            updateButtonVisibility();
+            input.focus();
+        });
+
+        function placeCaretAtEnd(el) {
+            el.focus();
+            const range = document.createRange();
+            range.selectNodeContents(el);
+            range.collapse(false);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+    </script>
+
+</body>
+
+</html>
