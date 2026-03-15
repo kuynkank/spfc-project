@@ -45,6 +45,7 @@ body {
 }
 
 [contenteditable]:empty:before {
+    content: attr(placeholder);
     color: #919191;
     cursor: text;
     display: inline-block;
