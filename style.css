@@ -19,13 +19,13 @@ body {
 .author {
     position: fixed;   
     bottom: 20px;
-    left: 40px;
+    left: 20px;
     text-align: left; 
     z-index: 10;
     font-size: x-small;
-    color: #111;
+    color: #829DFF;
 }
-
+  
 #promptInput {
     width: 100%;
     min-height: 120px;
@@ -112,24 +112,28 @@ button:hover {
 
   /* unvisited link */
 a:link {
-    color: #111;
-    text-decoration: none;
+    color: #829DFF;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   
   /* visited link */
   a:visited {
-    color: #111;
+    color: #829DFF;
     text-decoration: none;
   }
   
   /* mouse over link */
   a:hover {
-    color: blue;
+    color: #829DFF;
     text-decoration: underline;
+    text-underline-offset: 2px;
+    font-style: italic;
   }
   
   /* selected link */
   a:active {
-    color: blue;
+    color: #829DFF;
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
