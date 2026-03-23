@@ -12,6 +12,12 @@ body {
 #main-contents{
     width: 100%;
     max-width: 920px;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
 #answer-container {
@@ -28,7 +34,6 @@ body {
 .chat-container {
     width: 100%;
     max-width: 920px;
-    padding: 20px;
 }
 
 .statement {
