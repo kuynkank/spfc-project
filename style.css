@@ -9,10 +9,25 @@ body {
     padding: 0;
     overflow: hidden;
 }
+#main-contents{
+    width: 100%;
+    max-width: 920px;
+}
+
+#answer-container {
+    padding: 0 44px;
+    min-height: fit-content;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: left;
+    pointer-events: none;
+    z-index: 5;
+}
 
 .chat-container {
     width: 100%;
-    max-width: 720px;
+    max-width: 920px;
     padding: 20px;
 }
 
@@ -28,10 +43,9 @@ body {
   
 #promptInput {
     width: 100%;
-    min-height: 120px;
-    padding: 15px;
-    /* border: 1px dashed #919191; */
-    border-radius: 2px;
+    min-height: 50px;
+    padding: 24px;
+    border-radius: 24px;
     font-size: 16px;
     outline: none;
     box-sizing: border-box;
@@ -60,7 +74,7 @@ body {
     padding: 4px 8px;
     margin-right: 5px;
     margin-bottom: 5px;
-    border-radius: 2px;
+    border-radius: 12px;
     font-size: 16px;
     vertical-align: middle;
 }
@@ -72,11 +86,11 @@ body {
 }
 
 button {
-    padding: 8px 8px;
+    padding: 12px 12px;
     background-color: white;
     color: #111;
     border: 0.5px solid #111;
-    border-radius: 2px;
+    border-radius: 12px;
     cursor: pointer;
     font-weight: 200;
     font-size: 16px;
@@ -112,19 +126,19 @@ button:hover {
 
   /* unvisited link */
 a:link {
-    color: #829DFF;
+    color: #111;
     text-decoration: none;
   }
   
   /* visited link */
   a:visited {
-    color: #829DFF;
+    color: #111;
     text-decoration: none;
   }
   
   /* mouse over link */
   a:hover {
-    color: #829DFF;
+    color: #111;
     text-decoration: underline;
     text-underline-offset: 2px;
     font-style: italic;
@@ -132,7 +146,6 @@ a:link {
   
   /* selected link */
   a:active {
-    color: #829DFF;
+    color: #111;
     text-decoration: none;
   }
-  

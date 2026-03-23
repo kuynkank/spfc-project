@@ -11,22 +11,26 @@
 <body>
 
     <video autoplay muted loop playsinline id="bgVideo">
-        <source src="video_draft_3.mp4" type="video/mp4">
+        <source src="video_draft_4.mp4" type="video/mp4">
         Your browser does not support HTML5 video.
     </video>
 
-    <div class="chat-container">
-        <div id="promptInput" role="textbox" aria-label="Write your entry here" contenteditable="true" spellcheck="false" placeholder="TYPE ANYTHING"
-            tabindex="1"></div>
-
-        <div class="controls">
-            <button id="clearBtn" aria-label="Clear all entries" tabindex="3">FORGET</button>
-            <button id="askBtn" aria-label="Create a new entry" tabindex="2">ASK</button>
+    <div id="main-contents">
+        <div id="answer-container"></div>
+        <div class="chat-container">
+            <div id="promptInput" role="textbox" aria-label="Write your entry here" contenteditable="true" spellcheck="false" placeholder="SEARCH FOR AN ANSWER..."
+                tabindex="1"></div>
+    
+            <div class="controls">
+                <button id="clearBtn" aria-label="Clear all entries" tabindex="3">FORGET</button>
+                <button id="askBtn" aria-label="Create a new entry" tabindex="2">ASK</button>
+            </div>
         </div>
+    
     </div>
 
     <div class="statement">
-        <p>what is this? <a href="#" target="_blank">(tba)</a></p>
+        <p><a href="#" target="_blank">what is this?</a></p>
     </div>
 
     <script>
@@ -34,6 +38,11 @@
         const askBtn = document.getElementById('askBtn');
         const clearBtn = document.getElementById('clearBtn');
         const video = document.getElementById('bgVideo');
+        const answerBox = document.getElementById('answer-container');
+
+        let hasAnswered = false;
+
+        const answer = "When ‘searching for an answer’ with AI becomes a ritual, asking is all you can do. Asking is the human act.";
 
         const updateButtonVisibility = () => {
             const chips = input.querySelectorAll('.chip');
@@ -46,23 +55,9 @@
                 input.innerHTML = savedContent;
             }
             updateButtonVisibility();
-
-            // if (input.innerHTML.trim() === "") {
-            //     input.focus();
-            // } else {
-            //     placeCaretAtEnd(input);
-            // }
         };
 
         input.addEventListener('input', () => {
-            if (text.length > 0) {
-                video.pause();
-            } else {
-                if (text === "") {
-                    input.innerHTML = ""; 
-                }
-                video.play();
-                }
             localStorage.setItem('userPrompt', input.innerHTML);
             updateButtonVisibility();
         });
@@ -106,7 +101,11 @@
                 input.appendChild(document.createElement('br'));
                 input.appendChild(document.createElement('br'));
 
-                video.play();
+                const chipCount = input.querySelectorAll('.chip').length;
+                if (chipCount >= 5 && !hasAnswered) {
+                    hasAnswered = true;
+                    streamText(answer);
+                }
 
                 localStorage.setItem('userPrompt', input.innerHTML);
                 updateButtonVisibility();
@@ -116,10 +115,27 @@
 
         clearBtn.addEventListener('click', () => {
             localStorage.removeItem('userPrompt');
+
+            answerBox.innerHTML = '';
+
             input.innerHTML = '';
             updateButtonVisibility();
             input.focus();
         });
+
+        function streamText(text) {
+            let i = 0;
+            const speed = Math.floor(Math.random() * (140 - 30 + 1)) + 30; // Random ms value between 100 and 30
+            
+            function type() {
+                if (i < text.length) {
+                    answerBox.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
 
         function placeCaretAtEnd(el) {
             el.focus();
