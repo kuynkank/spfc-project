@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ask Portal</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,7 +26,6 @@
                 <button id="askBtn" aria-label="Create a new entry" tabindex="2">ASK</button>
             </div>
         </div>
-    
     </div>
 
     <div class="statement">
@@ -41,8 +40,7 @@
         const answerBox = document.getElementById('answer-container');
 
         let hasAnswered = false;
-
-        const answer = "When ‘searching for an answer’ with AI becomes a ritual, asking is all you can do. Asking is the human act.";
+        const answer = "\"ask\":\nto call on for an answer \nto put a question about\nspeak, utter\nto make a request of\nto call for - require\nto set as a price\ninvite";
 
         const updateButtonVisibility = () => {
             const chips = input.querySelectorAll('.chip');
@@ -50,11 +48,12 @@
         };
 
         window.onload = () => {
-            const savedContent = localStorage.getItem('userPrompt');
-            if (savedContent) {
-                input.innerHTML = savedContent;
-            }
+            // const savedContent = localStorage.getItem('userPrompt');
+            // if (savedContent) {
+            //     input.innerHTML = savedContent;
+            // }
             updateButtonVisibility();
+            input.focus();
         };
 
         input.addEventListener('input', () => {
@@ -97,14 +96,14 @@
                 chip.innerText = trimmedText;
 
                 input.appendChild(chip);
-
                 input.appendChild(document.createElement('br'));
                 input.appendChild(document.createElement('br'));
 
                 const chipCount = input.querySelectorAll('.chip').length;
+                
                 if (chipCount >= 5 && !hasAnswered) {
                     hasAnswered = true;
-                    streamText(answer);
+                    streamTextWithCaret(answer);
                 }
 
                 localStorage.setItem('userPrompt', input.innerHTML);
@@ -115,26 +114,35 @@
 
         clearBtn.addEventListener('click', () => {
             localStorage.removeItem('userPrompt');
-
             answerBox.innerHTML = '';
-
+            hasAnswered = false;
             input.innerHTML = '';
             updateButtonVisibility();
             input.focus();
         });
 
-        function streamText(text) {
+        function streamTextWithCaret(text) {
+            answerBox.innerHTML = '';
+            
+            const textSpan = document.createElement('span');
+            const caretSpan = document.createElement('span');
+            caretSpan.className = 'caret blink'; 
+            
+            answerBox.appendChild(textSpan);
+            answerBox.appendChild(caretSpan);
+
             let i = 0;
-            const speed = Math.floor(Math.random() * (140 - 30 + 1)) + 30; // Random ms value between 100 and 30
             
             function type() {
                 if (i < text.length) {
-                    answerBox.innerHTML += text.charAt(i);
+                    const speed = Math.floor(Math.random() * (80 - 30 + 1)) + 30;
+                    textSpan.textContent += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
                 }
             }
-            type();
+            
+            setTimeout(type, 200); 
         }
 
         function placeCaretAtEnd(el) {
@@ -149,5 +157,4 @@
     </script>
 
 </body>
-
 </html>
