@@ -189,7 +189,7 @@
         window.addEventListener('load', () => {
             const video = document.getElementById('bgVideo');
             video.play().catch(error => {
-                console.log("Autoplay was prevented by the browser.");
+                video.style.opacity = '0';
             });
         });
 

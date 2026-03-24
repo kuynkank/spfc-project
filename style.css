@@ -142,6 +142,9 @@ button:hover {
     
     filter:contrast(110%);
     z-index: -1;
+
+    background: url('images/video_draft-7.gif') no-repeat center center;
+    background-size: cover;
 }
 
 ::selection {
