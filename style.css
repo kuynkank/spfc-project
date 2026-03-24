@@ -55,13 +55,28 @@ h2{
     right: 20px;
     text-align: right; 
     z-index: 10;
+}
+  
+#infoLink{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
     font-size: 12px;
     letter-spacing: 1px;
     font-family: 'Helvetica', Helvetica, sans-serif;
     font-weight: 200;
     color: #f5f5f5;
 }
-  
+
+#infoLink:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-style: italic;
+    color: #f5f5f5;
+}
+
 #promptInput {
     width: 100%;
     min-height: 50px;

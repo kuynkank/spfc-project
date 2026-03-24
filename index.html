@@ -29,7 +29,7 @@
     </div>
 
     <div class="statement">
-        <p><a href="javascript:void(0)" id="infoLink">what is this?</a></p>
+        <p><button id="infoLink" type="button">what is this?</button></p>
     </div>
 
     <div id="infoModal" class="modal-overlay">
@@ -172,7 +172,6 @@
         const closeModal = document.getElementById('closeModal');
 
         infoLink.addEventListener('click', (e) => {
-            e.preventDefault();
             modal.classList.add('modal-open');
         });
 
