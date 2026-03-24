@@ -18,18 +18,30 @@
     <div id="main-contents">
         <div id="answer-container"></div>
         <div class="chat-container">
-            <div id="promptInput" role="textbox" aria-label="Write your entry here" contenteditable="true" spellcheck="false" placeholder="SEARCH FOR AN ANSWER..."
+            <div id="promptInput" role="textbox" aria-label="Write your entry here" contenteditable="true" spellcheck="false" placeholder="search for an answer..."
                 tabindex="1"></div>
     
             <div class="controls">
-                <button id="clearBtn" aria-label="Clear all entries" tabindex="3">FORGET</button>
-                <button id="askBtn" aria-label="Create a new entry" tabindex="2">ASK</button>
+                <button id="clearBtn" aria-label="Clear all entries" tabindex="3">forget</button>
+                <button id="askBtn" aria-label="Create a new entry" tabindex="2">ask</button>
             </div>
         </div>
     </div>
 
     <div class="statement">
-        <p><a href="#" target="_blank">what is this?</a></p>
+        <p><a href="javascript:void(0)" id="infoLink">what is this?</a></p>
+    </div>
+
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2>Ask Portal</h2>
+                <button id="closeModal" class="close-button">×</button>
+            </div>
+            <div class="modal-content">
+                <p><i>Ask Portal</i> is a machine of inconvenience. It borrows its form matter from familiar generative AI tools, from the rounded corners of its prompt input to the vast minimalism of its interface. It refuses all that generative AI offers.</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -40,7 +52,7 @@
         const answerBox = document.getElementById('answer-container');
 
         let hasAnswered = false;
-        const answer = "\"ask\":\nto call on for an answer \nto put a question about\nspeak, utter\nto make a request of\nto call for - require\nto set as a price\ninvite";
+        const answer = "\"ask\":\ncall on for an answer\n\nspeak, utter\nset as a price\ninvite\n\nperform a ritual\n\nas a tech demo";
 
         const updateButtonVisibility = () => {
             const chips = input.querySelectorAll('.chip');
@@ -135,7 +147,7 @@
             
             function type() {
                 if (i < text.length) {
-                    const speed = Math.floor(Math.random() * (80 - 30 + 1)) + 30;
+                    const speed = Math.floor(Math.random() * (300 - 30 + 1)) + 30;
                     textSpan.textContent += text.charAt(i);
                     i++;
                     setTimeout(type, speed);
@@ -154,6 +166,26 @@
             sel.removeAllRanges();
             sel.addRange(range);
         }
+
+        const modal = document.getElementById('infoModal');
+        const infoLink = document.getElementById('infoLink');
+        const closeModal = document.getElementById('closeModal');
+
+        infoLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('modal-open');
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('modal-open');
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('modal-open');
+            }
+        });
+
     </script>
 
 </body>
