@@ -57,6 +57,10 @@ h2{
     z-index: 10;
 }
   
+.small{
+    font-size: 10px;
+}
+
 #infoLink{
     background: none;
     border: none;
@@ -167,7 +171,7 @@ button:hover {
     background: #222;
   }
 
-  .caret {
+.caret {
     display: inline-block;
     width: 2px;
     height: 1.2em;
@@ -222,16 +226,13 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 12px;
     width: 100%;
 }
 
 .close-button {
-    padding: 24px 12px;
-    border-radius: 2px;
     background: none;
     border: none;
-    color: #ddd;
+    color: #aaa;
     font-size: 32px;
     line-height: 1;
     cursor: pointer;
@@ -245,6 +246,32 @@ button:hover {
 .modal-open {
     display: flex !important;
 }
+
+  /* unvisited link */
+  a:link {
+    color: #829DFF;
+    text-decoration: none;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: #829DFF;
+    text-decoration: none;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: #829DFF;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-style: italic;
+  }
+  
+  /* selected link */
+  a:active {
+    color: #829DFF;
+    text-decoration: none;
+  }
 
 /*Redaction typeface designed for the Redaction project by Titus Kaphar and Reginald Dwayne Betts*/
 @font-face {
